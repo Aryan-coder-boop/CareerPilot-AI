@@ -1,0 +1,43 @@
+# Test Configuration for Isolated Local & In-Memory Execution
+spring:
+  datasource:
+    url: jdbc:h2:mem:careerpilot_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+    show-sql: false
+
+  flyway:
+    enabled: false
+
+careerpilot:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 900000
+    refresh-expiration-ms: 604800000
+
+  storage:
+    upload-dir: ./target/test-uploads
+    max-file-size-mb: 5
+
+  rate-limit:
+    max-resumes-per-window: 5
+    window-minutes: 10
+
+  ai:
+    gemini:
+      api-key: ""
+      chat-model: gemini-3.8-flash
+      evaluator-model: gemini-3.1-pro-preview
+      embedding-model: text-embedding-004
+      embedding-dimension: 768
+      timeout-seconds: 5
+
